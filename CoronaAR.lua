@@ -14,7 +14,8 @@ local ar = {degrees = 0,height = 0,startDegrees = 0,startHeight = 0}
 local background = display.newRect(display.contentWidth*.5,display.contentHeight*.5,display.contentWidth,display.contentHeight)
 background.fill = {type = "camera"} -- gives you a fullscreen camera view
 background.width = display.contentHeight*(3/4) -- get proper aspect ratio for camera
-1: Augmented Reality tracking
+
+--1: Augmented Reality tracking
 local track_degrees = nil
 local track_degrees_last = nil
 
@@ -56,7 +57,8 @@ track = function (event)
 end
 
 Runtime:addEventListener("enterFrame",track)
-2: Get ar.degrees
+
+--2: Get ar.degrees
 local compass = function( event )
     if _G.device == "Android" or event.geographic == nil then
         ar.degrees = event.magnetic
@@ -73,13 +75,15 @@ local compass = function( event )
 end
 
 Runtime:addEventListener( "heading", compass )
-3: Get ar.height
+
+--3: Get ar.height
 accelerometer = function ( event )
   ar.height = event.zGravity
 end
 
 Runtime:addEventListener( "accelerometer", accelerometer )
-4: insert AR object
+
+--4: insert AR object
 local create_AR_object = function (obj)
      local xc,yc = obj:localToContent(0,0 )
      track_group:insert(obj)
